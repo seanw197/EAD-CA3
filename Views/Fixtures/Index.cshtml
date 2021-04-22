@@ -1,0 +1,68 @@
+﻿@model IEnumerable<EAD_CA3.Models.Fixture>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.datetime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpponentTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoalsFor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoalsAgainst)
+            </th>
+ 
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+               
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datetime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpponentTeam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoalsFor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoalsAgainst)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MatchID }) |
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@ViewBag.message
