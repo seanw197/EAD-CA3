@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Local Rovers FC - Fixtures Application</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -30,39 +30,70 @@
             <th>
                 @Html.DisplayNameFor(model => model.GoalsAgainst)
             </th>
- 
+            <th>
+                @Html.DisplayNameFor(model => model.GoalDiff)
+            </th>
+            <th>
+                @Html.Label("Status")
+            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-               
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MatchID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.datetime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Venue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OpponentTeam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GoalsFor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GoalsAgainst)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MatchID }) |
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+            <tr>
 
-@ViewBag.message
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatchID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datetime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpponentTeam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoalsFor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoalsAgainst)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GoalDiff)
+                </td>
+                <td>
+                    @if (item.datetime > DateTime.Now)
+                    {
+                        @Html.Label("Upcoming")
+                    }
+                    else
+                    {
+                        @Html.Label("Played")
+                    }
+                </td>
+                <td>
+                    @if (item.datetime < DateTime.Now)
+                    {
+                        @Html.ActionLink("Edit Result", "Edit", new { id = item.MatchID })
+                    }
+
+                </td>
+
+                </tr>
+
+            }
+                </tbody>
+</table>
+<p><b>Fixtures Summary</b><br />
+    @foreach (string s in ViewBag.message)
+    {
+        @Html.Label(s)
+        <br />
+    }
+
+</p>

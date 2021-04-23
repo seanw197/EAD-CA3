@@ -13,33 +13,30 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MatchID" class="control-label"></label>
-                <input asp-for="MatchID" class="form-control" />
-                <span asp-validation-for="MatchID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="datetime" class="control-label"></label>
-                <input asp-for="datetime" class="form-control" />
+                : @Html.Display("datetime")
+                @*<input asp-for="datetime" class="form-control" />*@
                 <span asp-validation-for="datetime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Venue" class="control-label"></label>
-                <input asp-for="Venue" class="form-control" />
+                : @Html.Display("Venue")
                 <span asp-validation-for="Venue" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OpponentTeam" class="control-label"></label>
-                <input asp-for="OpponentTeam" class="form-control" />
+                : @Html.Display("OpponentTeam")
                 <span asp-validation-for="OpponentTeam" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GoalsFor" class="control-label"></label>
-                <input asp-for="GoalsFor" class="form-control" />
+                <input asp-for="GoalsFor" class="form-control" new { style = "width:20%; display:inline;" }/>
                 <span asp-validation-for="GoalsFor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GoalsAgainst" class="control-label"></label>
-                <input asp-for="GoalsAgainst" class="form-control" />
+                <input asp-for="GoalsAgainst" class="form-control" new { style = "width:20%; display:inline;" } />
+                
                 <span asp-validation-for="GoalsAgainst" class="text-danger"></span>
             </div>
             <div class="form-group">

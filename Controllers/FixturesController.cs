@@ -13,12 +13,12 @@ namespace EAD_CA3.Controllers
 
         private static List<Fixture> FixtureList = new List<Fixture>()
         {
-            new Fixture() { MatchID = 1, datetime = new DateTime(2021, 2, 20), Venue = "Anfield", OpponentTeam = "Liverpool", GoalsFor = 2, GoalsAgainst = 1 },
-            new Fixture() { MatchID = 2, datetime = new DateTime(2021, 3, 21), Venue = "Oriel Park", OpponentTeam = "Bacelona", GoalsFor = 3, GoalsAgainst = 1 },
-            new Fixture() { MatchID = 3, datetime = new DateTime(2021, 4, 20), Venue = "Anfield", OpponentTeam = "Liverpool", GoalsFor = 2, GoalsAgainst = 1 },
-            new Fixture() { MatchID = 4, datetime = new DateTime(2021, 5, 21), Venue = "Oriel Park", OpponentTeam = "Juventus", GoalsFor = 0, GoalsAgainst = 0 },
-            new Fixture() { MatchID = 5, datetime = new DateTime(2021, 6, 20), Venue = "Tallaght", OpponentTeam = "Shamrock Rovers", GoalsFor = 0, GoalsAgainst = 0 },
-            new Fixture() { MatchID = 6, datetime = new DateTime(2021, 7, 21), Venue = "Oriel Park", OpponentTeam = "Man Utd", GoalsFor = 0, GoalsAgainst = 0 }
+            new Fixture() { MatchID = 1, datetime = new DateTime(2021, 2, 20, 13, 00, 00), Venue = "Anfield", OpponentTeam = "Liverpool", GoalsFor = 2, GoalsAgainst = 1 },
+            new Fixture() { MatchID = 2, datetime = new DateTime(2021, 3, 21, 13, 30, 00), Venue = "Oriel Park", OpponentTeam = "Bacelona", GoalsFor = 3, GoalsAgainst = 1 },
+            new Fixture() { MatchID = 3, datetime = new DateTime(2021, 4, 20, 14, 00, 00), Venue = "Anfield", OpponentTeam = "Liverpool", GoalsFor = 2, GoalsAgainst = 1 },
+            new Fixture() { MatchID = 4, datetime = new DateTime(2021, 5, 21, 14, 30, 00), Venue = "Oriel Park", OpponentTeam = "Juventus", GoalsFor = 0, GoalsAgainst = 0 },
+            new Fixture() { MatchID = 5, datetime = new DateTime(2021, 6, 20, 14, 00, 00), Venue = "Tallaght", OpponentTeam = "Shamrock Rovers", GoalsFor = 0, GoalsAgainst = 0 },
+            new Fixture() { MatchID = 6, datetime = new DateTime(2021, 7, 21, 14, 15, 00), Venue = "Oriel Park", OpponentTeam = "Man Utd", GoalsFor = 0, GoalsAgainst = 0 }
         };
 
         //new List<Fixture>();
@@ -27,8 +27,6 @@ namespace EAD_CA3.Controllers
         // GET: Fixtures
         public ActionResult Index()
         {
-            //int GoalDifference = GoalsFor - GoalsAgainst;
-
             int Points = 0;
             int Wins = 0;
             int Draws = 0;
@@ -53,11 +51,23 @@ namespace EAD_CA3.Controllers
                     Points += 1;
                     Draws += 1;
                 }
+
+                f.GoalDiff = f.GoalsFor - f.GoalsAgainst;
             }
 
-            ViewBag.message = "Total Played: " + Played + " Wins: " + Wins + " Draws: " + Draws + "Losses: " + Losses;
-            return View(FixtureList);
-           
+            int TotalGoalDiff = playedMatches.Sum(p => p.GoalDiff);            
+
+            ViewBag.message = new string[] 
+            { 
+                "Total Played: " + Played, 
+                "Wins: " + Wins,
+                "Draws: " + Draws,
+                "Losses: " + Losses,
+                "Total Goal Difference: " + TotalGoalDiff,
+                "Points: " + Points
+            };
+
+            return View(FixtureList.OrderBy(f => f.datetime));
         }
 
         // GET: Fixtures/Details/5
